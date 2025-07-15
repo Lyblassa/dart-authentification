@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
+import 'dart:convert';
+import 'package:flutter/services.dart';
 import '../models/user_model.dart';
 
 class AuthRepository {
@@ -10,6 +11,22 @@ class AuthRepository {
 
   // ✅ 1. Écoute l'état d'authentification
   Stream<User?> get authStateChanges => _auth.authStateChanges();
+  // Future<void> uploadSeedQuestions() async {
+  //   final firestore = FirebaseFirestore.instance;
+
+  //   // ✅ Charger ton JSON depuis les assets
+  //   final String response = await rootBundle.loadString(
+  //     'lib/assets/questions_seed.json',
+  //   );
+  //   final List<dynamic> data = json.decode(response);
+
+  //   for (var question in data) {
+  //     await firestore.collection('questions').doc(question['id']).set(question);
+  //     print('✅ Upload: ${question['id']}');
+  //   }
+
+  //   print('🎉 Toutes les questions ont été uploadées !');
+  // }
 
   // ✅ 2. Authentification par téléphone
   Future<void> signInWithPhone(

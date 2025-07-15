@@ -1,10 +1,13 @@
+import 'package:auth_demo/widgets/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:country_flags/country_flags.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'otp_form.dart';
 import 'package:provider/provider.dart';
 import '../../repositories/auth_repository.dart';
+import '../../widgets/phone_validator.dart'; // adapte ton chemin
+import '../../utils/auth_errors.dart';
 
 class PhoneAuthForm extends StatefulWidget {
   const PhoneAuthForm({super.key});
@@ -20,10 +23,25 @@ class _PhoneAuthFormState extends State<PhoneAuthForm> {
   final FocusNode phoneFocusNode = FocusNode();
   final FocusNode pseudoFocusNode = FocusNode();
 
+  Country _selectedCountry = Country(
+    phoneCode: '1',
+    countryCode: 'CA',
+    e164Sc: 1,
+    geographic: true,
+    level: 1,
+    name: 'Canada',
+    example: '5141234567',
+    displayName: 'Canada',
+    displayNameNoCountryCode: 'Canada',
+    e164Key: '',
+  );
+
   @override
   void dispose() {
     phoneFocusNode.dispose();
     pseudoFocusNode.dispose();
+    phoneController.dispose();
+    pseudoController.dispose();
     super.dispose();
   }
 
@@ -57,7 +75,6 @@ class _PhoneAuthFormState extends State<PhoneAuthForm> {
                 ),
               ),
             ),
-
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 32.h),
               child: Column(
@@ -82,62 +99,113 @@ class _PhoneAuthFormState extends State<PhoneAuthForm> {
                     ),
                   ),
                   SizedBox(height: 32.h),
-
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 8.w,
-                      vertical: 15.h,
-                    ),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black26),
-                      borderRadius: BorderRadius.circular(12.r),
-                      color: Colors.white,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CountryFlag.fromCountryCode(
+                  GestureDetector(
+                    onTap: () {
+                      showCountryPicker(
+                        context: context,
+                        showPhoneCode: true,
+                        countryFilter: [
                           'CA',
-                          height: 24.h,
-                          width: 32.w,
-                          shape: const RoundedRectangle(6),
-                        ),
-                        SizedBox(width: 8.w),
-                        Text(
-                          "Canada",
-                          style: TextStyle(
-                            fontFamily: 'Nunito',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16.sp,
+                          'CM',
+                          'SN',
+                          'FR',
+                          'BE',
+                          'CH',
+                          'CD',
+                          'CI',
+                          'BF',
+                          'GN',
+                          'GA',
+                        ],
+                        countryListTheme: CountryListThemeData(
+                          flagSize: 25,
+                          backgroundColor: Colors.white,
+                          textStyle: TextStyle(
+                            fontSize: 16,
                             color: Colors.black87,
                           ),
+                          bottomSheetHeight: 500,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20.0),
+                            topRight: Radius.circular(20.0),
+                          ),
+                          inputDecoration: InputDecoration(
+                            labelText: 'Rechercher',
+                            hintText: 'Commence à taper...',
+                            prefixIcon: const Icon(Icons.search),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: const Color(0xFF8C98A8).withOpacity(0.2),
+                              ),
+                            ),
+                          ),
                         ),
-                        SizedBox(width: 8.w),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          size: 16.sp,
-                          color: Colors.black54,
-                        ),
-                      ],
+                        onSelect: (Country country) {
+                          setState(() {
+                            _selectedCountry = country;
+                            phoneController
+                                .clear(); // remet à zéro pour formater correctement
+                          });
+                        },
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12.w,
+                        vertical: 15.h,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black26),
+                        borderRadius: BorderRadius.circular(12.r),
+                        color: Colors.white,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            _selectedCountry.flagEmoji,
+                            style: TextStyle(fontSize: 24.sp),
+                          ),
+                          SizedBox(width: 8.w),
+                          Expanded(
+                            child: Text(
+                              '${_selectedCountry.name} (+${_selectedCountry.phoneCode})',
+                              style: TextStyle(
+                                fontFamily: 'Nunito',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.sp,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: 16.sp,
+                            color: Colors.black54,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-
                   SizedBox(height: 16.h),
-
                   TextField(
                     controller: phoneController,
                     focusNode: phoneFocusNode,
                     keyboardType: TextInputType.phone,
                     cursorColor: const Color(0xFF00A8FC),
-                    style: TextStyle(fontFamily: 'Nunito', fontSize: 16.sp),
+                    inputFormatters: [
+                      PhoneInputFormatter(
+                        countryCode: _selectedCountry.countryCode,
+                      ),
+                    ],
                     decoration: InputDecoration(
-                      prefixText: "+1 ",
+                      prefixText: "+${_selectedCountry.phoneCode} ",
                       prefixStyle: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                         fontSize: 16.sp,
                       ),
-                      hintText: "604 1234 5678",
+                      hintText: "Numéro de téléphone",
                       hintStyle: TextStyle(fontSize: 15.sp),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.r),
@@ -154,9 +222,7 @@ class _PhoneAuthFormState extends State<PhoneAuthForm> {
                       fillColor: Colors.white,
                     ),
                   ),
-
                   SizedBox(height: 16.h),
-
                   TextField(
                     controller: pseudoController,
                     focusNode: pseudoFocusNode,
@@ -180,43 +246,82 @@ class _PhoneAuthFormState extends State<PhoneAuthForm> {
                       fillColor: Colors.white,
                     ),
                   ),
-
                   SizedBox(height: 32.h),
-
                   _buildLayeredButton(
                     label: "continuer",
                     onTap: () async {
-                      final authRepo = context.read<AuthRepository>();
-                      final phone = "+1${phoneController.text.trim()}";
+                      final rawNumber = phoneController.text.trim();
+                      final isoCode = _selectedCountry.countryCode;
+                      if (rawNumber.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(AuthErrors.emptyPhoneNumber)),
+                        );
+                        return;
+                      }
 
-                      if (phone.isNotEmpty) {
-                        try {
-                          await authRepo.signInWithPhone(phone, (
-                            verificationId,
-                          ) {
-                            // 👉 Passe le verificationId à ton OTPForm
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => OTPForm(
-                                  verificationId: verificationId,
-                                  phoneNumber: phone,
-                                  pseudo: pseudoController.text.trim(),
-                                ),
+                      final pseudoError = AuthErrors.validatePseudo(
+                        pseudoController.text,
+                      );
+
+                      if (pseudoError != null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(pseudoError),
+                            backgroundColor:
+                                Colors.red, // ✅ ici ton fond sera rouge
+                          ),
+                        );
+                        return;
+                      }
+
+                      if (!validatePhoneNumber(rawNumber, isoCode)) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              "Numéro invalide pour ${_selectedCountry.name}",
+                            ),
+                          ),
+                        );
+                        return;
+                      }
+
+                      final cleaned = cleanNumber(rawNumber);
+                      final phone = "+${_selectedCountry.phoneCode}$cleaned";
+
+                      final authRepo = context.read<AuthRepository>();
+
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        useRootNavigator: true,
+                        builder: (_) => const LoadingPage(
+                          message: 'Vérification du numéro...',
+                        ),
+                      );
+
+                      try {
+                        await authRepo.signInWithPhone(phone, (verificationId) {
+                          Navigator.of(context, rootNavigator: true).pop();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => OTPForm(
+                                verificationId: verificationId,
+                                phoneNumber: phone,
+                                pseudo: pseudoController.text.trim(),
                               ),
-                            );
-                          });
-                        } catch (e) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Erreur: ${e.toString()}')),
+                            ),
                           );
-                        }
+                        });
+                      } catch (e) {
+                        Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Erreur: ${e.toString()}')),
+                        );
                       }
                     },
                   ),
-
                   SizedBox(height: 16.h),
-
                   Text(
                     "nous vous enverrons un message",
                     style: TextStyle(

@@ -1,4 +1,5 @@
 import 'package:auth_demo/models/user_model.dart';
+import 'package:auth_demo/widgets/loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -160,7 +161,15 @@ class _OTPFormState extends State<OTPForm> {
                 onTap: () async {
                   final authRepo = context.read<AuthRepository>();
                   final smsCode = otpController.text.trim();
-
+                  // ✅ 1) Montre le loader
+                  showDialog(
+                    context: context,
+                    barrierDismissible: false,
+                    useRootNavigator: true,
+                    builder: (_) => const LoadingPage(
+                      message: 'Vérification code OTP en cours...',
+                    ),
+                  );
                   try {
                     final credential = await authRepo.verifySmsCode(
                       widget.verificationId,
@@ -182,14 +191,29 @@ class _OTPFormState extends State<OTPForm> {
 
                       await authRepo.createOrUpdateUser(userModel);
 
-                      Navigator.pushReplacement(
+                      // ✅ 2) Ferme le loader proprement
+                      Navigator.of(context, rootNavigator: true).pop();
+
+                      Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (_) => const HomeScreen()),
+                        (route) => false,
                       );
                     }
                   } catch (e) {
+                    Navigator.of(
+                      context,
+                      rootNavigator: true,
+                    ).pop(); // ferme le loader
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Erreur: ${e.toString()}')),
+                      SnackBar(
+                        content: Text(
+                          'Erreur: ${e.toString()}',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.red,
+                        duration: Duration(seconds: 8),
+                      ),
                     );
                   }
                 },

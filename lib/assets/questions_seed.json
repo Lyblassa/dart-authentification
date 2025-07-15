@@ -1,0 +1,60 @@
+[
+  {
+    "id": "q_A1_001",
+    "niveau": "A1",
+    "theme": "Vie quotidienne",
+    "competence": "COMPREHENSION_ECRITE",
+    "textSource": "Marie habite à Paris.",
+    "questionText": "Où habite Marie ?",
+    "options": ["Londres", "Paris", "Berlin"],
+    "correctAnswer": 1,
+    "audioUrl": null,
+    "feedback": "Marie = Paris. C’est écrit clairement."
+  },
+  {
+    "id": "q_A1_002",
+    "niveau": "A1",
+    "theme": "Vie quotidienne",
+    "competence": "COMPREHENSION_ECRITE",
+    "textSource": "Paul travaille dans une école.",
+    "questionText": "Où travaille Paul ?",
+    "options": ["Dans un hôpital", "Dans une école", "Dans une banque"],
+    "correctAnswer": 1,
+    "audioUrl": null,
+    "feedback": "L'information est dans le texte source."
+  },
+  {
+    "id": "q_A2_001",
+    "niveau": "A2",
+    "theme": "Quartier & Ville",
+    "competence": "COMPREHENSION_ORALE",
+    "questionText": "Que veut dire la personne ?",
+    "options": ["Elle part", "Elle reste", "Elle mange"],
+    "correctAnswer": 0,
+    "audioUrl": "https://firebasestorage.googleapis.com/v0/b/tcf-canada-a828f.firebasestorage.app/o/audios%2FCOMPREHENSION_ORALE%2Fstatic_audio_c856ac48-73c8-441d-b81a-8e1c29944a8d.mp3?alt=media&token=870faac1-d8dd-47d3-a6cf-a1136c48ddc0",
+    "feedback": "Dans l’audio, on entend qu’elle dit qu’elle part."
+  },
+  {
+    "id": "q_B1_001",
+    "niveau": "B1",
+    "theme": "Voyage & Tourisme",
+    "competence": "COMPREHENSION_ECRITE",
+    "textSource": "Les touristes visitent le musée chaque dimanche.",
+    "questionText": "Que font les touristes chaque dimanche ?",
+    "options": ["Ils vont au cinéma", "Ils visitent le musée", "Ils vont au parc"],
+    "correctAnswer": 1,
+    "audioUrl": null,
+    "feedback": "La phrase source indique clairement la réponse."
+  },
+  {
+    "id": "q_B2_001",
+    "niveau": "B2",
+    "theme": "Actualité & Médias",
+    "competence": "EXPRESSION_ECRITE",
+    "questionText": "Rédige un court article sur un événement récent dans ta ville.",
+    "options": [],
+    "correctAnswer": null,
+    "audioUrl": null,
+    "feedback": "Pense à structurer ton texte avec une introduction et une conclusion."
+  }
+]

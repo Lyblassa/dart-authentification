@@ -43,6 +43,9 @@ dependencies:
   flutter_screenutil: ^5.9.3
   cloud_firestore: ^4.15.0
   provider: ^6.0.5
+  country_picker: ^2.0.27
+  
+
   
 dev_dependencies:
   flutter_test:
@@ -68,6 +71,7 @@ flutter:
   assets:
     - lib/assets/animations/
     - lib/assets/icons/
+    - lib/assets/questions_seed.json
 
   fonts:
     - family: Poppins
