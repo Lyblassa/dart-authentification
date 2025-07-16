@@ -75,7 +75,7 @@ class TestPlacementResultPage extends StatelessWidget {
                   ), // ajuste la valeur selon ton décalage
                   child: Lottie.asset(
                     'lib/assets/animations/chatjoyeuxnew.json',
-                    width: 180,
+                    width: 300,
                     fit: BoxFit.contain,
                   ),
                 ),

@@ -8,7 +8,7 @@ class TestsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF7FBFD),
-      appBar: const TopBar(), // ✅ FIXE ET UNIFORME
+      appBar: const TopBar(), //  FIXE ET UNIFORME
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: Column(
@@ -16,7 +16,7 @@ class TestsPage extends StatelessWidget {
           children: [
             const SizedBox(height: 6),
 
-            // ✅ Nouveau titre plus clair
+            //  Nouveau titre plus clair
             const Text(
               'Prépare ton test TCF',
               style: TextStyle(
@@ -37,7 +37,7 @@ class TestsPage extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            // ✅ Partie 1
+            //  Partie 1
             const _TestCard(
               title: 'Compréhension Orale',
               questions: '37 Q • 37 min',
@@ -47,7 +47,7 @@ class TestsPage extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            // ✅ Partie 2
+            //  Partie 2
             const _TestCard(
               title: 'Compréhension Écrite',
               questions: '35 Q • 1h',
@@ -57,7 +57,7 @@ class TestsPage extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            // ✅ Partie 3
+            //  Partie 3
             const _TestCard(
               title: 'Expression Écrite',
               questions: '3 tâches • 1h',
@@ -67,7 +67,7 @@ class TestsPage extends StatelessWidget {
 
             const SizedBox(height: 16),
 
-            // ✅ Partie 4
+            //  Partie 4
             const _TestCard(
               title: 'Expression Orale',
               questions: '1 entretien • 12 min',
@@ -106,7 +106,7 @@ class _TestCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // ✅ Icône principale
+          //  Icône principale
           CircleAvatar(
             radius: 28,
             backgroundColor: Colors.blueAccent.withOpacity(0.1),
@@ -114,7 +114,7 @@ class _TestCard extends StatelessWidget {
           ),
           const SizedBox(width: 16),
 
-          // ✅ Texte principal
+          //  Texte principal
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,7 +144,7 @@ class _TestCard extends StatelessWidget {
             ),
           ),
 
-          // ✅ Bouton lancer
+          // Bouton lancer
           IconButton(
             onPressed: () {
               // TODO: Navigation vers la partie

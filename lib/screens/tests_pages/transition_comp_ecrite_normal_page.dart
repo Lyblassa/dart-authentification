@@ -16,9 +16,9 @@ class TransitionCompEcriteNormalPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Lottie.asset(
-                'lib/assets/animations/chat_brief.json', // Ton asset
-                width: 200,
-                height: 200,
+                'lib/assets/animations/comecrite.json', // Ton asset
+                width: 220,
+                height: 220,
               ),
               const SizedBox(height: 24),
               const Text(

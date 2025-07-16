@@ -9,7 +9,7 @@ class TransitionCompOralePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Exemple : boost de la taille globale
-    final double factor = 1.12; // 👈 Essayez 1.1 ou 1.2 selon tes tests
+    final double factor = 1.12; //  Essayez 1.1 ou 1.2 selon tes tests
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -20,11 +20,15 @@ class TransitionCompOralePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Lottie.asset(
-                  'lib/assets/animations/dormir.json',
-                  width: 150.w,
-                  fit: BoxFit.contain,
+                Align(
+                  alignment: Alignment.center,
+                  child: Lottie.asset(
+                    'lib/assets/animations/chatprincipalnew.json',
+                    width: 250.w,
+                    fit: BoxFit.contain,
+                  ),
                 ),
+
 
                 SizedBox(height: 24.h),
 

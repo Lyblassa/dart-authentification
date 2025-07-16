@@ -187,6 +187,18 @@ class AccueilPage extends StatelessWidget {
                               ),
                             ),
                             Positioned(
+                              top: 620.h,
+                              left: cx - 90.w,
+                              child: SizedBox(
+                                width: 150.w,
+                                child: Lottie.asset(
+                                  'lib/assets/animations/feu.json',
+                                ),
+                              ),
+                            ),
+
+
+                            Positioned(
                               top: 700.h,
                               left: cx + 60.w,
                               child: _Skill(

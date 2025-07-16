@@ -161,7 +161,7 @@ class _OTPFormState extends State<OTPForm> {
                 onTap: () async {
                   final authRepo = context.read<AuthRepository>();
                   final smsCode = otpController.text.trim();
-                  // ✅ 1) Montre le loader
+                  //  1) Montre le loader
                   showDialog(
                     context: context,
                     barrierDismissible: false,
@@ -191,7 +191,7 @@ class _OTPFormState extends State<OTPForm> {
 
                       await authRepo.createOrUpdateUser(userModel);
 
-                      // ✅ 2) Ferme le loader proprement
+                      //  2) Ferme le loader proprement
                       Navigator.of(context, rootNavigator: true).pop();
 
                       Navigator.pushAndRemoveUntil(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import 'test_exp_ecrite_step1_page.dart';
 
 class TestExpEcritePage extends StatelessWidget {
@@ -215,12 +216,16 @@ class TestExpEcritePage extends StatelessWidget {
             SizedBox(height: 40.h * scaleFactor),
 
             Center(
-              child: Image.asset(
-                'lib/assets/animations/chat.png',
-                width: 100.w * scaleFactor,
-                fit: BoxFit.contain,
+              child: SizedBox(
+                width: 200.w * scaleFactor,
+                height: 200.w * scaleFactor,
+                child: Lottie.asset(
+                  'lib/assets/animations/expressionecrite.json',
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
+
           ],
         ),
       ),

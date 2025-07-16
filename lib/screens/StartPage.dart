@@ -1,6 +1,7 @@
 import 'package:auth_demo/screens/tests_pages/transition_comp_orale_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; // ✅ ScreenUtil
+import 'package:lottie/lottie.dart';
 import '../../widgets/top_bar.dart';
 import 'tests_pages/test_comp_orale_page.dart';
 import 'home_screen.dart';
@@ -20,14 +21,16 @@ class StartPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // ✅ Chaton + bulle
+              //  Chaton + bulle
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    'lib/assets/animations/chat.png',
-                    width: 120.w,
-                    fit: BoxFit.contain,
+                  SizedBox(
+                    width: 100.w,
+                    height: 120.w,
+                    child: Lottie.asset(
+                      'lib/assets/animations/ecrivain.json',
+                    ),
                   ),
                   SizedBox(width: 12.w),
                   Stack(

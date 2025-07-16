@@ -9,7 +9,7 @@ class TestCompEcritePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double scaleFactor = 1.1; // ✅ UNE SEULE VARIABLE
+    final double scaleFactor = 1.1; //  UNE SEULE VARIABLE
 
     return Scaffold(
       backgroundColor: Colors.white,

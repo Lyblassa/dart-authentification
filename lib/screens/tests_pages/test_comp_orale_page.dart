@@ -9,12 +9,12 @@ class TestCompOralePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double scaleFactor = 1.1; // ✅ Ton facteur d'agrandissement
+    final double scaleFactor = 1.1; // Ton facteur d'agrandissement
 
     return Scaffold(
       backgroundColor: Colors.white,
 
-      // ✅ TopBar responsive
+      // TopBar responsive
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.h * scaleFactor),
         child: SafeArea(

@@ -16,7 +16,7 @@ class TransitionCompOraleNormalPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Lottie.asset(
-                'lib/assets/animations/chatbasket.json',
+                'lib/assets/animations/orale.json',
                 width: 200,
                 height: 200,
               ),

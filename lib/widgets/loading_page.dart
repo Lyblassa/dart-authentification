@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
 class LoadingPage extends StatelessWidget {
   final String message;
@@ -15,16 +16,17 @@ class LoadingPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // ✅ Image de ton chat
-            Image.asset(
-              'lib/assets/animations/chatload.png',
-              width: 120.w,
-              height: 120.h,
-              fit: BoxFit.contain,
+            SizedBox(
+              width: 180.w,
+              height: 180.w,
+              child: Lottie.asset(
+                'lib/assets/animations/chatattend.json',
+              ),
             ),
+
             SizedBox(height: 24.h),
 
-            // ✅ Texte de chargement
+            //  Texte de chargement
             Text(
               message,
               style: TextStyle(
@@ -36,12 +38,6 @@ class LoadingPage extends StatelessWidget {
             ),
 
             SizedBox(height: 24.h),
-
-            // ✅ Loader circulaire
-            const CircularProgressIndicator(
-              color: Color(0xFF00A8FC), // adapte à ta couleur principale
-              strokeWidth: 3,
-            ),
           ],
         ),
       ),
